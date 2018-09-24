@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Route, Redirect, withRouter } from 'react-router-dom';
+import { Route, Redirect, withRouter, Link } from 'react-router-dom';
+import Loadable from 'react-loadable';
 import './App.css';
 
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Login from './components/Login/Login';
-import Register from './components/Register/Register';
+// import Register from './components/Register/Register';
 import Lists from './components/Lists/Lists';
 import PluggableTodo from './components/PluggableTodo/PluggableTodo';
 // import Modal from 'react-modal';
@@ -19,6 +20,13 @@ const customStyles = {
     transform: 'translate(-50%, -50%)'
   }
 };
+
+const Loading = () => <div>Loading...</div>;
+
+const RegisterComponent = Loadable({
+  loader: () => import('./components/Register/Register'),
+  loading: Loading
+});
 
 class App extends Component {
   constructor() {
@@ -77,9 +85,10 @@ class App extends Component {
             </this.Modal>
           )}
         </div>
+        <Link to="/register">Register</Link> || <Link to="/login">Login</Link>
         {pathname === '/' ? <Redirect to="login" /> : ''}
         <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
+        <Route path="/register" component={RegisterComponent} />
         <PrivateRoute path="/lists" component={Lists} />
         <PrivateRoute path="/lists/:id" component={PluggableTodo} />
       </div>
