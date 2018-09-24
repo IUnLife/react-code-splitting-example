@@ -7,7 +7,7 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Lists from './components/Lists/Lists';
 import PluggableTodo from './components/PluggableTodo/PluggableTodo';
-// import Modal from 'react-modal';
+import Modal from 'react-modal';
 
 const customStyles = {
   content: {
@@ -19,6 +19,9 @@ const customStyles = {
     transform: 'translate(-50%, -50%)'
   }
 };
+
+// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
+Modal.setAppElement('#root');
 
 class App extends Component {
   constructor() {
@@ -34,11 +37,7 @@ class App extends Component {
   }
 
   openModal() {
-    import('react-modal').then(Modal => {
-      this.Modal = Modal;
-      this.Modal.setAppElement('#root');
-      this.setState({ modalIsOpen: true });
-    });
+    this.setState({ modalIsOpen: true });
   }
 
   afterOpenModal() {
@@ -57,7 +56,7 @@ class App extends Component {
         <div>
           <button onClick={this.openModal}>Open Modal</button>
           {this.state.modalIsOpen && (
-            <this.Modal
+            <Modal
               isOpen={this.state.modalIsOpen}
               onAfterOpen={this.afterOpenModal}
               onRequestClose={this.closeModal}
@@ -74,7 +73,7 @@ class App extends Component {
                 <button>inside</button>
                 <button>the modal</button>
               </form>
-            </this.Modal>
+            </Modal>
           )}
         </div>
         {pathname === '/' ? <Redirect to="login" /> : ''}
