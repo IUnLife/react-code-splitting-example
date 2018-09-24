@@ -5,7 +5,7 @@ import addItem from '../../actions/addItem.action';
 
 class PluggableTodo extends Component {
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
       <div className="container">
         <h1>List Name</h1>
@@ -27,7 +27,11 @@ class PluggableTodo extends Component {
           <li className="editMode">
             <input type="checkbox" />
             <label>Go Shopping</label>
-            <input type="text" value="Go Shopping" onChange={() => console.assert('hi')} />
+            <input
+              type="text"
+              value="Go Shopping"
+              onChange={() => console.assert('hi')}
+            />
             <button className="edit">Edit</button>
             <button className="delete">Delete</button>
           </li>
@@ -49,15 +53,18 @@ class PluggableTodo extends Component {
 }
 
 const mapStateToProps = (storeState, props) => {
-  console.log(storeState)
+  console.log(storeState);
   return {
     list: storeState.lists.find(list => list.id === props.listId),
     ...props
   };
-}
+};
 
 const mapActionsToProps = {
   addItem
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(PluggableTodo);
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(PluggableTodo);
