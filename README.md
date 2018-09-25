@@ -1,4 +1,4 @@
-# Todolist application (interview task for Vicinity Charter)
+# Todolist application
 Todolist application frontend made in reactjs
 
 Command to run: `npm start` in root directory of project
